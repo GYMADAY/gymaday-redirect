@@ -160,19 +160,15 @@
 
         // Create multiple deep link formats to try
         const deepLinks = [
-            // Expo Go deep links for development
-            `exp://localhost:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            `exp://127.0.0.1:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            
-            // Try with your local IP (you may need to update this)
+            // Direct Expo Go links (most reliable for development)
             `exp://192.168.1.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            `exp://10.0.2.2:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            `exp://localhost:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
             // Custom scheme fallback
             `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
-            // Intent-based Android deep link
-            `intent://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}#Intent;scheme=gymaday;package=host.exp.exponent;end`
+            // Expo Go app scheme
+            `exps://exp.host/@anonymous/bolt-expo-nativewind-${Math.random().toString(36).substr(2, 5)}?payment-success=true&order_id=${orderId}&amount=${amount}&user_id=${userId}`
         ];
         
         console.log('Deep links to try:', deepLinks);
