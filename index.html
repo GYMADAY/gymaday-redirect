@@ -160,16 +160,19 @@
 
         // Create multiple deep link formats to try
         const deepLinks = [
-            // Custom scheme (if app is published)
+            // Expo Go deep links for development
+            `exp://localhost:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            `exp://127.0.0.1:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            
+            // Try with your local IP (you may need to update this)
+            `exp://192.168.1.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            `exp://10.0.2.2:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            
+            // Custom scheme fallback
             `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
-            // Expo Go development links (most likely to work)
-            `exp://exp.host/@anonymous/bolt-expo-starter?path=/payment-success&order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            `exp://192.168.1.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            `exp://localhost:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            
-            // Web fallback
-            `http://localhost:8081/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
+            // Intent-based Android deep link
+            `intent://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}#Intent;scheme=gymaday;package=host.exp.exponent;end`
         ];
         
         console.log('Deep links to try:', deepLinks);
@@ -177,9 +180,9 @@
         // Show the links being tested
         document.getElementById('linkTest').innerHTML = `
             <strong>Testing Links:</strong><br>
-            1. ${deepLinks[0]}<br>
-            2. ${deepLinks[1]}<br>
-            3. ${deepLinks[2]}
+            1. exp://localhost:8081/--/payment-success<br>
+            2. exp://127.0.0.1:8081/--/payment-success<br>
+            3. Custom scheme: gymaday://payment-success
         `;
 
         // Set button links
