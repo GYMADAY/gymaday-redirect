@@ -117,13 +117,14 @@
         
         <div id="buttons" style="display: none;">
             <a id="deepLink" class="button">Open GYMADAY App</a>
+            <a href="#" class="button" onclick="window.close()">Close Window</a>
         </div>
         
         <div class="countdown" id="countdown"></div>
         
         <div class="fallback">
             <strong>App not opening automatically?</strong><br>
-            Make sure GYMADAY app is running in Expo Go, then click the button above.
+            Make sure GYMADAY app is installed on your device, then click "Open GYMADAY App" above.
         </div>
 
         <div class="debug" id="debug"></div>
@@ -150,16 +151,17 @@
             Page Status: LOADED SUCCESSFULLY ✅<br>
             Timestamp: ${new Date().toLocaleString()}
         `;
-
-        // Create deep links for your Bolt Expo server
-        const deepLinks = [
-        const deepLinks = [
-            // Your Bolt Expo development server
-            `exp://jktufha3yw4z3hr.boltexpo.dev/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            `exp://jktufha3yw4z3hr.boltexpo.dev/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            // Custom scheme (works best on mobile)
+            `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
-            // Fallback custom scheme
-            `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
+            // Expo development server format
+            `exp://jktufha3yw4z3hr.boltexpo.dev/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            
+            // Try localhost (for web development)
+            `http://localhost:8081/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            
+            // Try your current Bolt Expo server
+            `https://jktufha3yw4z3hr.boltexpo.dev/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
         ];
 
         // Set button link to first option
@@ -171,7 +173,7 @@
             };
         }
 
-        let countdown = 3;
+        let countdown = 5;
         let attempted = false;
         
         function tryOpenApp(link) {
@@ -179,7 +181,7 @@
             
             // Method 1: Direct location change
             try {
-                window.location.href = link;
+                window.location = link;
             } catch (e) {
                 console.log('Direct method failed:', e);
             }
@@ -187,6 +189,13 @@
             // Method 2: Create invisible iframe
             setTimeout(() => {
                 try {
+                    // Try window.open first for mobile
+                    const popup = window.open(link, '_blank');
+                    if (popup) {
+                        popup.close();
+                    }
+                } catch (e) {
+                    console.log('Window.open method failed:', e);
                     const iframe = document.createElement('iframe');
                     iframe.style.display = 'none';
                     iframe.src = link;
@@ -198,7 +207,7 @@
                         }
                     }, 1000);
                 } catch (e) {
-                    console.log('Iframe method failed:', e);
+                    console.log('All fallback methods failed:', e);
                 }
             }, 200);
         }
@@ -206,7 +215,7 @@
         function updateCountdown() {
             const countdownEl = document.getElementById('countdown');
             if (countdownEl) {
-                countdownEl.textContent = `Auto-redirect in ${countdown} seconds...`;
+                countdownEl.textContent = `Trying to open app... ${countdown}s`;
             }
             countdown--;
             
@@ -225,7 +234,7 @@
             deepLinks.forEach((link, index) => {
                 setTimeout(() => {
                     tryOpenApp(link);
-                }, index * 500);
+                }, index * 800);
             });
             
             // Show manual options after attempts
@@ -234,7 +243,7 @@
                 const buttonsEl = document.getElementById('buttons');
                 if (statusEl) statusEl.style.display = 'none';
                 if (buttonsEl) buttonsEl.style.display = 'block';
-            }, 4000);
+            }, 6000);
         }
 
         // Start countdown immediately
