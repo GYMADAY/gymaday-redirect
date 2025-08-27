@@ -152,21 +152,13 @@
         `;
 
         // Create deep links for Expo development
-            // Bolt Expo development server links
+            // Your Bolt Expo development server
             `exp://jktufha3yw4z3hr.boltexpo.dev/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             `exp://jktufha3yw4z3hr.boltexpo.dev/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            `exp://127.0.0.1:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
-            // Network IP variations (update these with your actual IP)
-            `exp://192.168.1.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            `exp://192.168.0.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            `exp://10.0.0.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            
-            // Custom scheme fallback
+            // Fallback custom scheme
             `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
         ];
-            // Additional Bolt Expo formats
-            `https://jktufha3yw4z3hr.boltexpo.dev/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
 
         // Set button link to first option
         if (document.getElementById('deepLink')) {
