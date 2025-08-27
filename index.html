@@ -99,14 +99,6 @@
             color: #666;
             text-align: left;
         }
-        .link-test {
-            margin-top: 15px;
-            padding: 10px;
-            background: #1a1a1a;
-            border-radius: 8px;
-            font-size: 11px;
-            color: #888;
-        }
     </style>
 </head>
 <body>
@@ -131,11 +123,10 @@
         
         <div class="fallback">
             <strong>App not opening automatically?</strong><br>
-            Make sure GYMADAY app is running in Expo Go, then try the buttons above.
+            Make sure GYMADAY app is running in Expo Go, then click the button above.
         </div>
 
         <div class="debug" id="debug"></div>
-        <div class="link-test" id="linkTest"></div>
     </div>
 
     <script>
@@ -153,45 +144,33 @@
             Order ID: ${orderId}<br>
             Amount: ₹${amount}<br>
             User ID: ${userId ? userId.substring(0, 8) + '...' : 'Not found'}<br>
-            Current URL: ${window.location.href}<br>
-            User Agent: ${navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'}<br>
-            Platform: ${navigator.platform}
+            Current URL: ${window.location.href}
         `;
 
-        // Create multiple deep link formats to try
+        // Create deep links - UPDATED FOR YOUR SETUP
         const deepLinks = [
-            // Direct Expo Go links (most reliable for development)
-            `exp://192.168.1.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            // Try localhost first (most common for Expo development)
             `exp://localhost:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
-            // Custom scheme fallback
-            `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            // Try 127.0.0.1 as fallback
+            `exp://127.0.0.1:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
-            // Expo Go app scheme
-            `exps://exp.host/@anonymous/bolt-expo-nativewind-${Math.random().toString(36).substr(2, 5)}?payment-success=true&order_id=${orderId}&amount=${amount}&user_id=${userId}`
+            // Try common network IPs
+            `exp://192.168.1.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            `exp://192.168.0.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            
+            // Custom scheme fallback
+            `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
         ];
         
         console.log('Deep links to try:', deepLinks);
 
-        // Show the links being tested
-        document.getElementById('linkTest').innerHTML = `
-            <strong>Testing Links:</strong><br>
-            1. exp://localhost:8081/--/payment-success<br>
-            2. exp://127.0.0.1:8081/--/payment-success<br>
-            3. Custom scheme: gymaday://payment-success
-        `;
-
-        // Set button links
+        // Set button link to first option
         if (document.getElementById('deepLink')) {
             document.getElementById('deepLink').href = deepLinks[0];
             document.getElementById('deepLink').onclick = function(e) {
                 e.preventDefault();
-                // Try all deep links when button is clicked
-                deepLinks.forEach((link, index) => {
-                    setTimeout(() => {
-                        tryOpenApp(link);
-                    }, index * 500);
-                });
+                attemptAllLinks();
             };
         }
 
@@ -225,15 +204,6 @@
                     console.log('Iframe method failed:', e);
                 }
             }, 200);
-            
-            // Method 3: Try window.open
-            setTimeout(() => {
-                try {
-                    window.open(link, '_self');
-                } catch (e) {
-                    console.log('Window.open failed:', e);
-                }
-            }, 400);
         }
         
         function updateCountdown() {
@@ -258,7 +228,7 @@
             deepLinks.forEach((link, index) => {
                 setTimeout(() => {
                     tryOpenApp(link);
-                }, index * 1000);
+                }, index * 500);
             });
             
             // Show manual options after attempts
