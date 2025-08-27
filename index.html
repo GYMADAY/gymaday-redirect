@@ -1,123 +1,251 @@
-<!DOCTYPE html><html lang="en" data-theme="dark"><head><!--remix-island-start--><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>GYMADAY Fitness Booking App</title><meta property="og:type" content="object"/><meta property="og:site_name" content="bolt.new"/><meta property="og:title" content="GYMADAY Fitness Booking App"/><meta property="og:image" content="https://social-img.staticblitz.com/bolt-projects/sb1-2oldtgs2"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="GYMADAY Fitness Booking App"/><meta name="twitter:description" content="Starter project for Node.js, a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta name="twitter:image" content="https://social-img.staticblitz.com/bolt-projects/sb1-2oldtgs2"/><meta name="twitter:site" content="@StackBlitz"/><meta name="bolt-version" content="11745e4"/><link rel="stylesheet" href="/assets/root-DV9FmPU1.css"/><link rel="stylesheet" href="/assets/LightRays-apN2LHcc.css"/><link rel="icon" href="/static/favicon.svg" type="image/svg+xml"/><link rel="stylesheet" href="/assets/ReactToastify-Bh76j7cs.css"/><link rel="stylesheet" href="/assets/tailwind-compat-Bwh-BmjE.css"/><link rel="stylesheet" href="/assets/index-Blfkm6m7.css"/><link rel="stylesheet" href="/assets/xterm-LZoznX6r.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"/><link rel="stylesheet" href="/assets/useTeamInvites-2lP7qIO8.css"/><link rel="stylesheet" href="/assets/Chat-DEw1q4XJ.css"/><link rel="stylesheet" href="/assets/meta-CzqnVCjZ.css"/><script>(function createWorkaroundGlobal() {
-  window["__name"] = () => {
-  };
-})();</script><script>(function blockDOMMutations() {
-  const observer = new MutationObserver((mutations) => {
-    observer.disconnect();
-    mutations.reverse().forEach((mutation) => {
-      if (mutation.type === "childList") {
-        mutation.addedNodes.forEach((node2) => {
-          if ([document.head, document.body, document.documentElement].includes(node2.parentNode)) {
-            return;
-          }
-          if (node2.parentNode) {
-            node2.parentNode.removeChild(node2);
-          }
-        });
-        mutation.removedNodes.forEach((node2) => {
-          if (mutation.previousSibling) {
-            mutation.target.insertBefore(node2, mutation.previousSibling.nextSibling);
-          } else if (mutation.target) {
-            mutation.target.appendChild(node2);
-          }
-        });
-      }
-      if (mutation.type === "attributes") {
-        const { target, attributeName, oldValue } = mutation;
-        if (attributeName) {
-          if (oldValue === null) {
-            target.removeAttribute(attributeName);
-          } else {
-            target.setAttribute(attributeName, oldValue);
-          }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GYMADAY - Payment Complete</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-      }
-      if (mutation.type === "characterData") {
-        mutation.target.data = mutation.oldValue ?? "";
-      }
-    });
-    observe();
-  });
-  function observe() {
-    observer.observe(document, {
-      subtree: true,
-      childList: true,
-      attributes: true,
-      attributeOldValue: true,
-      characterData: true,
-      characterDataOldValue: true
-    });
-  }
-  __name(observe, "observe");
-  window.addEventListener("DOMContentLoaded", observe);
-  window.__allowDOMMutations = () => {
-    observer.disconnect();
-  };
-})();</script><script>(function themeCode(storageKey, defaultTheme) {
-  if (window.location.pathname !== "/figma") {
-    setBoltTheme();
-  }
-  function setBoltTheme() {
-    const htmlElement = document.querySelector("html");
-    const localTheme = localStorage.getItem(storageKey);
-    const metaElement = document.querySelector("meta[name=bolt-theme]");
-    let theme = metaElement?.content ?? localTheme ?? defaultTheme;
-    htmlElement.setAttribute("data-theme-option", theme);
-    if (theme === "system") {
-      const prefersDark2 = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      theme = prefersDark2 ? "dark" : "light";
-    }
-    htmlElement.setAttribute("data-theme", theme);
-  }
-  __name(setBoltTheme, "setBoltTheme");
-})("bolt_theme", "dark");</script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-58KJM59B');</script><script id="sentry-initial-user-data" type="application/json">{"id":"3701139","username":"akhilgondaliya18","email":"akhilgondaliya18@gmail.com"}</script><script>(function sentryLoader(environment, userElementId) {
-  window.sentryOnLoad = () => {
-    Sentry.init({
-      release: "11745e43eecbf435cd29f25fc71a5a6c446ba729",
-      ignoreTransactions: ["/api/token/cors", "/api/analytics"],
-      ignoreErrors: ["/api/token/cors", "/api/analytics"],
-      // https://docs.sentry.io/platforms/javascript/session-replay/
-      replaysSessionSampleRate: 0,
-      replaysOnErrorSampleRate: 0,
-      sampleRate: 0.02,
-      tracesSampleRate: 0.05,
-      enabled: environment !== "development",
-      debug: false,
-      allowUrls: ["bolt.new", "pages.dev"],
-      environment
-    });
-    const userSource = document.getElementById(userElementId)?.textContent;
-    if (!userSource) {
-      return;
-    }
-    Sentry.setUser(JSON.parse(userSource ?? "null"));
-  };
-})("production", "sentry-initial-user-data");</script><script src="https://js.sentry-cdn.com/a2f02ffb9d5f16260f262b40e72c0efe.min.js" crossorigin="anonymous"></script><!--remix-island-end--></head><body class="bg-bolt-elements-background-depth-1"><div id="root" class="w-full h-full"><div class="flex flex-col h-full w-full"><header class="flex shrink-0 select-none selection-accent items-center pl-5 pr-4 border-b h-[var(--header-height)] z-21 fixed w-full backdrop-blur-[17px] border-transparent"><div class="flex grow-1 basis-60 items-center gap-2 z-logo text-bolt-elements-textPrimary"><a href="/" class="text-2xl font-semibold text-accent flex items-center"><span class="i-bolt:logos-bolt-new?mask w-[70.5px] inline-block"></span></a></div><div class="flex grow-1 basis-60 justify-end items-center gap-3"></div></header></div><script>((STORAGE_KEY2, restoreKey) => {
-    if (!window.history.state || !window.history.state.key) {
-      let key2 = Math.random().toString(32).slice(2);
-      window.history.replaceState({
-        key: key2
-      }, "");
-    }
-    try {
-      let positions = JSON.parse(sessionStorage.getItem(STORAGE_KEY2) || "{}");
-      let storedY = positions[restoreKey || window.history.state.key];
-      if (typeof storedY === "number") {
-        window.scrollTo(0, storedY);
-      }
-    } catch (error4) {
-      console.error(error4);
-      sessionStorage.removeItem(STORAGE_KEY2);
-    }
-  })("positions", null)</script><link rel="modulepreload" href="/assets/manifest-8497c18e.js"/><link rel="modulepreload" href="/assets/entry.client-v_tp1-za.js"/><link rel="modulepreload" href="/assets/jsx-runtime-C02By_Nm.js"/><link rel="modulepreload" href="/assets/index-NYF_6UeG.js"/><link rel="modulepreload" href="/assets/appsignal.client-NYE40v_t.js"/><link rel="modulepreload" href="/assets/components-DqCFWNYC.js"/><link rel="modulepreload" href="/assets/constants-DgKkEC_p.js"/><link rel="modulepreload" href="/assets/invariant-vhR6lzgf.js"/><link rel="modulepreload" href="/assets/index-CzNa8jkM.js"/><link rel="modulepreload" href="/assets/server.browser-CtJI65YW.js"/><link rel="modulepreload" href="/assets/client-only-B-7-RkUn.js"/><link rel="modulepreload" href="/assets/ErrorBoundary-BBNCzN1M.js"/><link rel="modulepreload" href="/assets/stripIndent-Dh65_-Do.js"/><link rel="modulepreload" href="/assets/Alert-WR3A9Ko3.js"/><link rel="modulepreload" href="/assets/Button-CdFnhO55.js"/><link rel="modulepreload" href="/assets/IconButton-C7WMhjk7.js"/><link rel="modulepreload" href="/assets/classNames-C9X9HzVk.js"/><link rel="modulepreload" href="/assets/Header-DYzNARyA.js"/><link rel="modulepreload" href="/assets/config-DhwDm07-.js"/><link rel="modulepreload" href="/assets/tslib.es6-ChmJQI-w.js"/><link rel="modulepreload" href="/assets/urls-DinhcF3o.js"/><link rel="modulepreload" href="/assets/login-ByzPk_j8.js"/><link rel="modulepreload" href="/assets/LoadingDots-Bmawlm3h.js"/><link rel="modulepreload" href="/assets/oauth-BPquxmr3.js"/><link rel="modulepreload" href="/assets/token-Cy1Jsft2.js"/><link rel="modulepreload" href="/assets/BaseHeader-BgZMLoO1.js"/><link rel="modulepreload" href="/assets/Link-CqrL6f2N.js"/><link rel="modulepreload" href="/assets/description-D9innEuQ.js"/><link rel="modulepreload" href="/assets/LightRays.client-DYCM3dsK.js"/><link rel="modulepreload" href="/assets/LightRaysCore-CTc-0cnx.js"/><link rel="modulepreload" href="/assets/LightRays.module-ob5nzZIi.js"/><link rel="modulepreload" href="/assets/LegacyIconButton-BEZ0VTKJ.js"/><link rel="modulepreload" href="/assets/root-D2k1Wg4Y.js"/><link rel="modulepreload" href="/assets/Input-DtaYagRL.js"/><link rel="modulepreload" href="/assets/Avatar-otloZPWK.js"/><link rel="modulepreload" href="/assets/withSpinner-C482rRbW.js"/><link rel="modulepreload" href="/assets/format-BtwRmPa1.js"/><link rel="modulepreload" href="/assets/useTeamInvites-Dl0ZiY2c.js"/><link rel="modulepreload" href="/assets/index-1ychSYY_.js"/><link rel="modulepreload" href="/assets/pricing-C5kYceCX.js"/><link rel="modulepreload" href="/assets/debounce-Xcw10nJg.js"/><link rel="modulepreload" href="/assets/request-with-auth-D9-MIMlR.js"/><link rel="modulepreload" href="/assets/Pagination-DLtofvsi.js"/><link rel="modulepreload" href="/assets/_chat-B6cvkOKi.js"/><link rel="modulepreload" href="/assets/Chat.client-DRvNXQkw.js"/><link rel="modulepreload" href="/assets/bolt-connect-BdSUK4eu.js"/><link rel="modulepreload" href="/assets/meta-RG-sD3Ei.js"/><link rel="modulepreload" href="/assets/ConnectToFigmaDialog-8q20b1mB.js"/><link rel="modulepreload" href="/assets/index-BbP3371Q.js"/><link rel="modulepreload" href="/assets/LegacyDialog-DWgG85dj.js"/><link rel="modulepreload" href="/assets/applicationManager-Cn94dR1T.js"/><link rel="modulepreload" href="/assets/workbench-Bc4ykmVB.js"/><link rel="modulepreload" href="/assets/client-github-DLK_MHvO.js"/><link rel="modulepreload" href="/assets/stripe-CfevpQjD.js"/><link rel="modulepreload" href="/assets/client-error-DQScmJi_.js"/><link rel="modulepreload" href="/assets/domains-BRW5rRUx.js"/><link rel="modulepreload" href="/assets/helpers-BwYtMIl3.js"/><link rel="modulepreload" href="/assets/openWithStackblitzAuth-BbN45aaa.js"/><link rel="modulepreload" href="/assets/animationVariants-NYaHW5lQ.js"/><link rel="modulepreload" href="/assets/DiscordSupportModal-C-KqKGB0.js"/><link rel="modulepreload" href="/assets/github-BgaFxfpQ.js"/><link rel="modulepreload" href="/assets/useProjectVisibility-BMq7F9NW.js"/><link rel="modulepreload" href="/assets/projectVisibility-Bvz2K5jv.js"/><link rel="modulepreload" href="/assets/prepare-body-CFTSWJEq.js"/><link rel="modulepreload" href="/assets/formatDistanceToNow-DGbwR5NK.js"/><link rel="modulepreload" href="/assets/getRoundingMethod-DMjN5L56.js"/><link rel="modulepreload" href="/assets/isYesterday-D3VS28aP.js"/><link rel="modulepreload" href="/assets/connect._provider-COUWXvXd.js"/><link rel="modulepreload" href="/assets/api-DfOQNWS0.js"/><link rel="modulepreload" href="/assets/_chat.~._slug-Cz36YD6J.js"/><script>window.__remixContext = {"basename":"/","future":{"v3_fetcherPersist":true,"v3_relativeSplatPath":true,"v3_throwAbortReason":true,"v3_singleFetch":false,"v3_lazyRouteDiscovery":false,"unstable_optimizeDeps":false},"isSpaMode":false,"state":{"loaderData":{"root":{"user":{"avatar":"https://stackblitz.com/avatars/A/312.svg","bio":null,"canPurchaseDomain":true,"canSubscribe":true,"churnkeyAuthKey":"30b81e344ad8d1935f600760195509ada6d77285a0b8730507f86a372f67aca6","createdAt":"2025-03-24T11:33:11.837Z","email":"akhilgondaliya18@gmail.com","expirableBoltTokenPurchases":[],"externalAccount":null,"externalAccounts":[{"provider":"stripe","username":null,"uri":null},{"provider":"google","username":"akhilgondaliya18@gmail.com","uri":null}],"featureFlags":{"experimentalNode":false,"previewTunneling":false,"streamingWorker":false,"hackathon":false,"privateRegistries":true,"teamManagement":true,"newPricingCards":false,"refreshSubscriptionData":false,"githubOrgs":false,"supabaseManagement":false},"kind":"USER","location":null,"membership":{"nextInterval":null,"nextTier":null,"paid":true,"subscription":{"currentMonthStart":"2025-08-23","currentMonthStartTimestamp":1755934672000,"currentPeriodEnd":1758613072000,"currentPeriodStart":1755934672000,"freeTrial":false,"interval":"monthly","nextMonthStart":"2025-09-23","nextMonthStartTimestamp":1758613072000,"pendingUpdate":null,"planCost":2500,"quantity":1,"status":"canceled"},"tier":1,"updateSubscriptionFlowVersion":"v1"},"membershipLevel":1,"name":"akhilgondaliya18@gmail.com","nextMembershipLevel":0,"onboardingSurveyResponse":{"status":"finished","surveyVersion":null},"roles":[],"site":null,"stripeCustomerId":"cus_S3UJSyQsRhqrQx","teamsPlan":false,"tokenAllocations":[{"event":"create-bucket","expiresAt":"2025-09-07T10:37:26.000Z","id":821192,"kind":"upgrade","label":null,"organizationId":null,"startsAt":"2025-07-07T10:37:26.000Z","tokens":16000000},{"event":"create-bucket","expiresAt":"2025-09-07T10:37:26.000Z","id":806884,"kind":"recurring","label":null,"organizationId":null,"startsAt":"2025-07-07T10:37:26.000Z","tokens":10000000},{"event":"create-bucket","expiresAt":"2025-09-07T10:37:26.000Z","id":862610,"kind":"upgrade","label":null,"organizationId":null,"startsAt":"2025-07-07T10:37:26.000Z","tokens":29000000},{"event":"create-bucket","expiresAt":"2025-10-23T07:37:52.000Z","id":1032208,"kind":"recurring","label":null,"organizationId":null,"startsAt":"2025-08-23T07:37:52.000Z","tokens":10000000}],"totalBoltTokenPurchases":1000000,"username":"akhilgondaliya18","wcAPIMembership":null,"wcAPIStripeAccount":null,"id":"3701139","organizations":[],"organizationInvites":[],"activeOrganizationId":null,"surveys":{"onboarding":"finished"}}},"routes/_chat.~.$slug":{"user":{"avatar":"https://stackblitz.com/avatars/A/312.svg","bio":null,"canPurchaseDomain":true,"canSubscribe":true,"churnkeyAuthKey":"30b81e344ad8d1935f600760195509ada6d77285a0b8730507f86a372f67aca6","createdAt":"2025-03-24T11:33:11.837Z","email":"akhilgondaliya18@gmail.com","expirableBoltTokenPurchases":[],"externalAccount":null,"externalAccounts":[{"provider":"stripe","username":null,"uri":null},{"provider":"google","username":"akhilgondaliya18@gmail.com","uri":null}],"featureFlags":{"experimentalNode":false,"previewTunneling":false,"streamingWorker":false,"hackathon":false,"privateRegistries":true,"teamManagement":true,"newPricingCards":false,"refreshSubscriptionData":false,"githubOrgs":false,"supabaseManagement":false},"kind":"USER","location":null,"membership":{"nextInterval":null,"nextTier":null,"paid":true,"subscription":{"currentMonthStart":"2025-08-23","currentMonthStartTimestamp":1755934672000,"currentPeriodEnd":1758613072000,"currentPeriodStart":1755934672000,"freeTrial":false,"interval":"monthly","nextMonthStart":"2025-09-23","nextMonthStartTimestamp":1758613072000,"pendingUpdate":null,"planCost":2500,"quantity":1,"status":"canceled"},"tier":1,"updateSubscriptionFlowVersion":"v1"},"membershipLevel":1,"name":"akhilgondaliya18@gmail.com","nextMembershipLevel":0,"onboardingSurveyResponse":{"status":"finished","surveyVersion":null},"roles":[],"site":null,"stripeCustomerId":"cus_S3UJSyQsRhqrQx","teamsPlan":false,"tokenAllocations":[{"event":"create-bucket","expiresAt":"2025-09-07T10:37:26.000Z","id":821192,"kind":"upgrade","label":null,"organizationId":null,"startsAt":"2025-07-07T10:37:26.000Z","tokens":16000000},{"event":"create-bucket","expiresAt":"2025-09-07T10:37:26.000Z","id":806884,"kind":"recurring","label":null,"organizationId":null,"startsAt":"2025-07-07T10:37:26.000Z","tokens":10000000},{"event":"create-bucket","expiresAt":"2025-09-07T10:37:26.000Z","id":862610,"kind":"upgrade","label":null,"organizationId":null,"startsAt":"2025-07-07T10:37:26.000Z","tokens":29000000},{"event":"create-bucket","expiresAt":"2025-10-23T07:37:52.000Z","id":1032208,"kind":"recurring","label":null,"organizationId":null,"startsAt":"2025-08-23T07:37:52.000Z","tokens":10000000}],"totalBoltTokenPurchases":1000000,"username":"akhilgondaliya18","wcAPIMembership":null,"wcAPIStripeAccount":null,"id":"3701139","organizations":[],"organizationInvites":[],"activeOrganizationId":null,"surveys":{"onboarding":"finished"},"settings":{"featurePreviews":{}}},"slug":"sb1-2oldtgs2","projectId":"51835746","projectInfo":{"description":"Starter project for Node.js, a JavaScript runtime built on Chrome's V8 JavaScript engine.","id":"51835746","slug":"sb1-2oldtgs2","title":"GYMADAY Fitness Booking App"},"tokenStats":{"billingPeriod":{"from":1755934672000,"to":1758613072000},"maxPerDay":10000000,"maxPerMonth":10000000,"regularTokens":{"used":26000000,"available":36000000},"regularTokenBreakdown":[{"expiresOn":1754563046000,"available":0,"used":0,"type":"rolled-over"},{"expiresOn":1757241446000,"available":26000000,"used":26000000,"type":"rolled-over"},{"expiresOn":1761205072000,"available":10000000,"used":0,"type":"active-month"}],"nextTier":{"level":2,"limits":{"perDay":26000000,"perMonth":26000000},"type":"pro"},"overflow":{"available":1000000,"used":1000000},"purchased":{"available":1000000,"used":1000000},"totalThisMonth":10000000,"totalToday":0,"referralTokens":{"free":{"available":5000000,"rewardCount":25,"used":5000000},"paid":{"available":0,"rewardCount":0,"used":0}},"specialTokens":{"available":0,"used":0}},"loggedIn":true},"routes/_chat":null},"actionData":null,"errors":null}};</script><script type="module" async="">import "/assets/manifest-8497c18e.js";
-import * as route0 from "/assets/root-D2k1Wg4Y.js";
-import * as route1 from "/assets/_chat-B6cvkOKi.js";
-import * as route2 from "/assets/_chat.~._slug-Cz36YD6J.js";
+        .container {
+            text-align: center;
+            max-width: 400px;
+            padding: 40px;
+            background: #111;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 69, 0, 0.3);
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FF4500;
+            margin-bottom: 20px;
+        }
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 18px;
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .submessage {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .button {
+            background: linear-gradient(135deg, #FF4500, #FF6B35);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+        }
+        .fallback {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+            padding: 15px;
+            background: #0a0a0a;
+            border-radius: 10px;
+        }
+        .spinner {
+            border: 2px solid #333;
+            border-top: 2px solid #FF4500;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .countdown {
+            font-size: 14px;
+            color: #FF4500;
+            margin-top: 15px;
+        }
+        .debug {
+            margin-top: 20px;
+            padding: 15px;
+            background: #0a0a0a;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #666;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">GYMADAY</div>
+        <div class="success-icon">🎉</div>
+        <div class="message">Payment Successful!</div>
+        <div class="submessage">
+            Your wallet has been updated. Redirecting to app...
+        </div>
+        
+        <div id="status">
+            <div class="spinner"></div>
+            Opening GYMADAY app...
+        </div>
+        
+        <div id="buttons" style="display: none;">
+            <a id="deepLink" class="button">Open GYMADAY App</a>
+            <a href="#" class="button" onclick="window.close()">Close Window</a>
+        </div>
+        
+        <div class="countdown" id="countdown"></div>
+        
+        <div class="fallback">
+            <strong>App not opening automatically?</strong><br>
+            Make sure GYMADAY app is installed on your device, then click "Open GYMADAY App" above.
+        </div>
 
-window.__remixRouteModules = {"root":route0,"routes/_chat":route1,"routes/_chat.~.$slug":route2};
+        <div class="debug" id="debug"></div>
+    </div>
 
-import("/assets/entry.client-v_tp1-za.js");</script></div></body></html>
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('order_id');
+        const amount = urlParams.get('amount');
+        const userId = urlParams.get('user_id');
+        
+        console.log('Payment success page loaded with params:', { orderId, amount, userId });
+
+        // Show debug info
+        document.getElementById('debug').innerHTML = `
+            <strong>Debug Info:</strong><br>
+            Order ID: ${orderId}<br>
+            Amount: ₹${amount}<br>
+            User ID: ${userId ? userId.substring(0, 8) + '...' : 'Not found'}<br>
+            Current URL: ${window.location.href}
+        `;
+
+        // Create deep link with all parameters
+        const deepLink = `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`;
+        
+        console.log('Deep link:', deepLink);
+
+        // Set button link
+        if (document.getElementById('deepLink')) {
+            document.getElementById('deepLink').href = deepLink;
+        }
+
+        let countdown = 3;
+        let attempted = false;
+        
+        function updateCountdown() {
+            const countdownEl = document.getElementById('countdown');
+            if (countdownEl) {
+                countdownEl.textContent = `Auto-redirect in ${countdown} seconds...`;
+            }
+            countdown--;
+            
+            if (countdown < 0) {
+                attemptDeepLink();
+            }
+        }
+        
+        function attemptDeepLink() {
+            if (attempted) return;
+            attempted = true;
+            
+            console.log('Attempting to open deep link:', deepLink);
+            
+            // Method 1: Direct location change
+            try {
+                window.location.href = deepLink;
+            } catch (e) {
+                console.log('Method 1 failed:', e);
+            }
+            
+            // Method 2: Create invisible iframe (fallback)
+            setTimeout(() => {
+                try {
+                    const iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.src = deepLink;
+                    document.body.appendChild(iframe);
+                    
+                    // Remove iframe after attempt
+                    setTimeout(() => {
+                        if (document.body.contains(iframe)) {
+                            document.body.removeChild(iframe);
+                        }
+                    }, 1000);
+                } catch (e) {
+                    console.log('Method 2 failed:', e);
+                }
+            }, 500);
+            
+            // Method 3: Try opening in new window (another fallback)
+            setTimeout(() => {
+                try {
+                    window.open(deepLink, '_self');
+                } catch (e) {
+                    console.log('Method 3 failed:', e);
+                }
+            }, 1000);
+            
+            // Show manual options after a delay
+            setTimeout(() => {
+                const statusEl = document.getElementById('status');
+                const buttonsEl = document.getElementById('buttons');
+                if (statusEl) statusEl.style.display = 'none';
+                if (buttonsEl) buttonsEl.style.display = 'block';
+            }, 4000);
+        }
+
+        // Start countdown immediately
+        updateCountdown();
+        const countdownInterval = setInterval(() => {
+            if (countdown >= 0) {
+                updateCountdown();
+            } else {
+                clearInterval(countdownInterval);
+            }
+        }, 1000);
+        
+        // Also try when page becomes visible (in case user switches back)
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && !attempted) {
+                attemptDeepLink();
+            }
+        });
+        
+        // Immediate attempt when page loads (backup)
+        setTimeout(() => {
+            if (!attempted) {
+                attemptDeepLink();
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
