@@ -130,6 +130,9 @@
     </div>
 
     <script>
+        console.log('=== GYMADAY REDIRECT PAGE LOADED ===');
+        console.log('Current URL:', window.location.href);
+        
         // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const orderId = urlParams.get('order_id');
@@ -144,20 +147,20 @@
             Order ID: ${orderId}<br>
             Amount: ₹${amount}<br>
             User ID: ${userId ? userId.substring(0, 8) + '...' : 'Not found'}<br>
-            Current URL: ${window.location.href}
+            Current URL: ${window.location.href}<br>
+            Page Status: LOADED SUCCESSFULLY ✅
         `;
 
-        // Create deep links - UPDATED FOR YOUR SETUP
+        // Create deep links for Expo development
         const deepLinks = [
-            // Try localhost first (most common for Expo development)
+            // Primary Expo Go links (most reliable for development)
             `exp://localhost:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
-            
-            // Try 127.0.0.1 as fallback
             `exp://127.0.0.1:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
-            // Try common network IPs
+            // Network IP variations (update these with your actual IP)
             `exp://192.168.1.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             `exp://192.168.0.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            `exp://10.0.0.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
             // Custom scheme fallback
             `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
