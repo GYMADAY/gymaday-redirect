@@ -146,15 +146,15 @@
             <strong>Debug Info:</strong><br>
             Order ID: ${orderId}<br>
             Amount: ₹${amount}<br>
-            User ID: ${userId ? userId.substring(0, 8) + '...' : 'Not found'}<br>
-            Current URL: ${window.location.href}<br>
+            1. exp://jktufha3yw4z3hr.boltexpo.dev/--/payment-success<br>
+            2. exp://jktufha3yw4z3hr.boltexpo.dev/payment-success<br>
             Page Status: LOADED SUCCESSFULLY ✅
         `;
 
         // Create deep links for Expo development
-        const deepLinks = [
-            // Primary Expo Go links (most reliable for development)
-            `exp://localhost:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            // Bolt Expo development server links
+            `exp://jktufha3yw4z3hr.boltexpo.dev/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            `exp://jktufha3yw4z3hr.boltexpo.dev/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             `exp://127.0.0.1:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
             
             // Network IP variations (update these with your actual IP)
@@ -165,8 +165,8 @@
             // Custom scheme fallback
             `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
         ];
-        
-        console.log('Deep links to try:', deepLinks);
+            // Additional Bolt Expo formats
+            `https://jktufha3yw4z3hr.boltexpo.dev/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
 
         // Set button link to first option
         if (document.getElementById('deepLink')) {
