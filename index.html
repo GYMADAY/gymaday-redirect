@@ -99,6 +99,14 @@
             color: #666;
             text-align: left;
         }
+        .link-test {
+            margin-top: 15px;
+            padding: 10px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            font-size: 11px;
+            color: #888;
+        }
     </style>
 </head>
 <body>
@@ -116,7 +124,8 @@
         </div>
         
         <div id="buttons" style="display: none;">
-            <a id="deepLink" class="button">Open GYMADAY App</a>
+            <a id="deepLink1" class="button">Open GYMADAY App</a>
+            <a id="deepLink2" class="button">Try Expo Link</a>
             <a href="#" class="button" onclick="window.close()">Close Window</a>
         </div>
         
@@ -124,10 +133,11 @@
         
         <div class="fallback">
             <strong>App not opening automatically?</strong><br>
-            Make sure GYMADAY app is installed on your device, then click "Open GYMADAY App" above.
+            Make sure GYMADAY app is running in Expo Go, then try the buttons above.
         </div>
 
         <div class="debug" id="debug"></div>
+        <div class="link-test" id="linkTest"></div>
     </div>
 
     <script>
@@ -145,21 +155,92 @@
             Order ID: ${orderId}<br>
             Amount: ₹${amount}<br>
             User ID: ${userId ? userId.substring(0, 8) + '...' : 'Not found'}<br>
-            Current URL: ${window.location.href}
+            Current URL: ${window.location.href}<br>
+            User Agent: ${navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'}<br>
+            Platform: ${navigator.platform}
         `;
 
-        // Create deep link with all parameters
-        const deepLink = `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`;
+        // Create multiple deep link formats to try
+        const deepLinks = [
+            // Custom scheme (if app is published)
+            `gymaday://payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            
+            // Expo Go development links (most likely to work)
+            `exp://exp.host/@anonymous/bolt-expo-starter?path=/payment-success&order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            `exp://192.168.1.100:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            `exp://localhost:8081/--/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`,
+            
+            // Web fallback
+            `http://localhost:8081/payment-success?order_id=${orderId}&amount=${amount}&user_id=${userId}`
+        ];
         
-        console.log('Deep link:', deepLink);
+        console.log('Deep links to try:', deepLinks);
 
-        // Set button link
-        if (document.getElementById('deepLink')) {
-            document.getElementById('deepLink').href = deepLink;
+        // Show the links being tested
+        document.getElementById('linkTest').innerHTML = `
+            <strong>Testing Links:</strong><br>
+            1. ${deepLinks[0]}<br>
+            2. ${deepLinks[1]}<br>
+            3. ${deepLinks[2]}
+        `;
+
+        // Set button links
+        if (document.getElementById('deepLink1')) {
+            document.getElementById('deepLink1').href = deepLinks[0];
+            document.getElementById('deepLink1').onclick = function(e) {
+                e.preventDefault();
+                tryOpenApp(deepLinks[0]);
+            };
+        }
+        
+        if (document.getElementById('deepLink2')) {
+            document.getElementById('deepLink2').href = deepLinks[1];
+            document.getElementById('deepLink2').onclick = function(e) {
+                e.preventDefault();
+                tryOpenApp(deepLinks[1]);
+            };
         }
 
         let countdown = 3;
         let attempted = false;
+        
+        function tryOpenApp(link) {
+            console.log('Trying to open:', link);
+            
+            // Method 1: Direct location change
+            try {
+                window.location.href = link;
+            } catch (e) {
+                console.log('Direct method failed:', e);
+            }
+            
+            // Method 2: Create invisible iframe
+            setTimeout(() => {
+                try {
+                    const iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.src = link;
+                    document.body.appendChild(iframe);
+                    
+                    setTimeout(() => {
+                        if (document.body.contains(iframe)) {
+                            document.body.removeChild(iframe);
+                        }
+                    }, 1000);
+                } catch (e) {
+                    console.log('Iframe method failed:', e);
+                }
+            }, 200);
+            
+            // Method 3: Try window.open
+            setTimeout(() => {
+                try {
+                    window.open(link, '_self');
+                } catch (e) {
+                    console.log('Window.open failed:', e);
+                }
+            }, 400);
+        }
         
         function updateCountdown() {
             const countdownEl = document.getElementById('countdown');
@@ -169,52 +250,24 @@
             countdown--;
             
             if (countdown < 0) {
-                attemptDeepLink();
+                attemptAllLinks();
             }
         }
         
-        function attemptDeepLink() {
+        function attemptAllLinks() {
             if (attempted) return;
             attempted = true;
             
-            console.log('Attempting to open deep link:', deepLink);
+            console.log('Attempting all deep links...');
             
-            // Method 1: Direct location change
-            try {
-                window.location.href = deepLink;
-            } catch (e) {
-                console.log('Method 1 failed:', e);
-            }
+            // Try each link with a delay
+            deepLinks.forEach((link, index) => {
+                setTimeout(() => {
+                    tryOpenApp(link);
+                }, index * 1000);
+            });
             
-            // Method 2: Create invisible iframe (fallback)
-            setTimeout(() => {
-                try {
-                    const iframe = document.createElement('iframe');
-                    iframe.style.display = 'none';
-                    iframe.src = deepLink;
-                    document.body.appendChild(iframe);
-                    
-                    // Remove iframe after attempt
-                    setTimeout(() => {
-                        if (document.body.contains(iframe)) {
-                            document.body.removeChild(iframe);
-                        }
-                    }, 1000);
-                } catch (e) {
-                    console.log('Method 2 failed:', e);
-                }
-            }, 500);
-            
-            // Method 3: Try opening in new window (another fallback)
-            setTimeout(() => {
-                try {
-                    window.open(deepLink, '_self');
-                } catch (e) {
-                    console.log('Method 3 failed:', e);
-                }
-            }, 1000);
-            
-            // Show manual options after a delay
+            // Show manual options after attempts
             setTimeout(() => {
                 const statusEl = document.getElementById('status');
                 const buttonsEl = document.getElementById('buttons');
@@ -233,19 +286,19 @@
             }
         }, 1000);
         
-        // Also try when page becomes visible (in case user switches back)
+        // Also try when page becomes visible
         document.addEventListener('visibilitychange', () => {
             if (!document.hidden && !attempted) {
-                attemptDeepLink();
+                attemptAllLinks();
             }
         });
         
-        // Immediate attempt when page loads (backup)
+        // Try immediately on page load as backup
         setTimeout(() => {
             if (!attempted) {
-                attemptDeepLink();
+                attemptAllLinks();
             }
-        }, 2000);
+        }, 1000);
     </script>
 </body>
 </html>
