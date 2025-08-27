@@ -124,9 +124,7 @@
         </div>
         
         <div id="buttons" style="display: none;">
-            <a id="deepLink1" class="button">Open GYMADAY App</a>
-            <a id="deepLink2" class="button">Try Expo Link</a>
-            <a href="#" class="button" onclick="window.close()">Close Window</a>
+            <a id="deepLink" class="button">Open GYMADAY App</a>
         </div>
         
         <div class="countdown" id="countdown"></div>
@@ -185,19 +183,16 @@
         `;
 
         // Set button links
-        if (document.getElementById('deepLink1')) {
-            document.getElementById('deepLink1').href = deepLinks[0];
-            document.getElementById('deepLink1').onclick = function(e) {
+        if (document.getElementById('deepLink')) {
+            document.getElementById('deepLink').href = deepLinks[0];
+            document.getElementById('deepLink').onclick = function(e) {
                 e.preventDefault();
-                tryOpenApp(deepLinks[0]);
-            };
-        }
-        
-        if (document.getElementById('deepLink2')) {
-            document.getElementById('deepLink2').href = deepLinks[1];
-            document.getElementById('deepLink2').onclick = function(e) {
-                e.preventDefault();
-                tryOpenApp(deepLinks[1]);
+                // Try all deep links when button is clicked
+                deepLinks.forEach((link, index) => {
+                    setTimeout(() => {
+                        tryOpenApp(link);
+                    }, index * 500);
+                });
             };
         }
 
